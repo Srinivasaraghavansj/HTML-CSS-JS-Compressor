@@ -4,8 +4,10 @@ import shutil
 import requests
 from css_html_js_minify import html_minify, css_minify
 
-old_dir = "/Volumes/GoogleDrive/My Drive/EDUCUBOT POC SRINI DEV FILES/Traffic signal Exercise"
-new_dir = "/Users/srinivasaraghavan/Downloads/Traffic signal Exercise"+" Production"
+folder_name = "Traffic signal Exercise"
+
+old_dir = f"/Volumes/GoogleDrive/My Drive/EDUCUBOT POC SRINI DEV FILES/{folder_name}"
+new_dir = f"/Users/srinivasaraghavan/Downloads/{folder_name}"+" Production"
 
 url = 'https://www.toptal.com/developers/javascript-minifier/raw'
 
