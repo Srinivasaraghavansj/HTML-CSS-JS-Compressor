@@ -3,11 +3,13 @@ import os
 import shutil
 import requests
 from css_html_js_minify import html_minify, css_minify
+from jsmin import jsmin
+from tqdm import tqdm
 
-folder_name = "Traffic signal Exercise"
+folder_name = "POC Latest"
 
-old_dir = f"/Volumes/GoogleDrive/My Drive/EDUCUBOT POC SRINI DEV FILES/{folder_name}"
-new_dir = f"/Users/srinivasaraghavan/Downloads/{folder_name}"+" Production"
+old_dir = f"/Volumes/GoogleDrive-114081981939626733457/My Drive/EDUCUBOT POC SRINI DEV FILES/{folder_name}"
+new_dir = f"/Users/srinivasaraghavan/Downloads/ECB POC Production/{folder_name}"+" Production"
 
 url = 'https://www.toptal.com/developers/javascript-minifier/raw'
 
@@ -54,14 +56,14 @@ for i in unique_dirs:
     path = new_dir+i
     os.makedirs(path, exist_ok=True)
 
-for i in all_files:
+for i in tqdm(all_files):
     file_ = i.replace(old_dir,"")
     i_ = i.split(".")
     if i_[-1] == "js" and not (i_[-2]== "min" or "compressed" in i_[-2]):
         with open(i, 'r') as f:
-            data = {'input':f.read()}
+            data = f.read()
             with open(new_dir+file_,'w') as w:
-                w.write(requests.post(url, data=data).text)
+                w.write(jsmin(data))
 
     elif i_[-1] == "css" and not (i_[-2]== "min" or "compressed" in i_[-2]):
         with open(i, 'r') as f:
